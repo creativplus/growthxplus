@@ -10,16 +10,21 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 
     <script>
-    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
-    n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
-    document,'script','https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', 'YOUR_PIXEL_ID'); 
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '1220196503401364');
     fbq('track', 'PageView');
     fbq('track', 'Lead'); 
     </script>
-
+    <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=1220196503401364&ev=PageView&noscript=1"
+    /></noscript>
     <style>
         :root { 
             --brand: #0f172a; 
@@ -108,6 +113,7 @@
             margin-bottom: 8px; 
             line-height: 1.4;
             font-weight: 500;
+            text-wrap: balance; /* Keeps headlines balanced on mobile */
         }
 
         .blue { color: var(--accent); font-weight: 800; }
@@ -159,8 +165,8 @@
 
         @media (max-width: 480px) {
             .card { padding: 40px 24px; }
-            h1 { font-size: 1.8rem; }
-            .pulse-text { font-size: 1.1rem; }
+            h1 { font-size: 1.8rem; margin-bottom: 24px; }
+            .pulse-text { font-size: 1.15rem; }
         }
     </style>
 </head>
@@ -174,7 +180,7 @@
         
         <h1>Application Received.</h1>
         
-        <p class="pulse-text"><b>Arpit AI </b> will <b>call</b> you <b>with-in 30 sec</b></p>
+        <p class="pulse-text"><b>Arpit AI </b> will <b>call</b> you <span style="white-space: nowrap;"><b>with-in 30 sec</b></span></p>
         <p class="pulse-text">to learn about your <span class="blue">business</span> and <span class="red">challenges</span>.</p>
         
         <div class="loader-container">
