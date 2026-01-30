@@ -45,7 +45,7 @@
             background-image: radial-gradient(#e2e8f0 1px, transparent 1px);
             background-size: 32px 32px; 
             line-height: 1.5; 
-            overflow-x: hidden; /* Prevents horizontal scroll on mobile */
+            overflow-x: hidden; 
         }
 
         .container { max-width: 1000px; margin: 0 auto; padding: 0 24px; }
@@ -58,7 +58,6 @@
             position: relative;
         }
 
-        /* Subtle Glow Effect behind Hero */
         .hero::before {
             content: '';
             position: absolute;
@@ -89,7 +88,6 @@
         }
         
         h1 { 
-            /* Responsive Font Sizing */
             font-size: clamp(2.4rem, 6vw, 4.2rem); 
             line-height: 1.1; 
             font-weight: 900; 
@@ -232,6 +230,7 @@
             color: var(--accent); 
             margin-right: 12px; 
             font-weight: 900;
+            flex-shrink: 0; /* Prevents arrow from squishing */
         }
 
         /* --- FOOTER --- */
@@ -275,20 +274,22 @@
         /* --- RESPONSIVE MEDIA QUERIES --- */
         @media (max-width: 768px) {
             .hero { padding: 50px 0 30px; }
-            
-            /* Align text better on mobile */
             h1 { margin-bottom: 16px; font-size: 2.5rem; } 
             .red-caps { font-size: 0.75rem; padding: 6px 12px; }
-            
-            /* Make button full width on mobile for easier tapping */
             .btn-main { width: 100%; padding: 18px; }
             
-            /* Stack grid items */
             .comparison-grid { grid-template-columns: 1fr; gap: 16px; margin-bottom: 40px; }
             
-            .founders-wrap { padding: 32px 20px; }
-            .founders-grid { grid-template-columns: 1fr 1fr; } /* 2 cols for list on mobile */
+            .founders-wrap { padding: 32px 16px; }
             
+            /* FIXED: Single Column on Mobile so text doesn't cut off */
+            .founders-grid { 
+                grid-template-columns: 1fr; 
+                gap: 8px;
+            } 
+            
+            .f-item { padding: 14px 16px; font-size: 1rem; }
+
             .modal-inner { padding: 30px 20px; margin: 20px auto; }
         }
 
@@ -342,7 +343,7 @@
             <div class="f-item">Freelancers</div>
             <div class="f-item">Agency owners</div>
             <div class="f-item">Interior Designers</div>
-            <div class="f-item">CA/Accounting</div>
+            <div class="f-item">CA/Accounting services</div>
             <div class="f-item">Consultants</div>
             <div class="f-item">Coaches</div>
             <div class="f-item">Developers</div>
@@ -421,14 +422,14 @@
             // 1. Send Data to Webhook
             await fetch('https://control.creativplus.in/webhook/growthx-arpit-lead', {
                 method: 'POST',
-                mode: 'no-cors', // Ensures it works even if webhook has CORS restrictions
+                mode: 'no-cors', 
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(data)
             });
 
-            // 2. Track Lead Event (Optional for Pixel)
+            // 2. Track Lead Event for Pixel
             if(window.fbq) { fbq('track', 'Lead'); }
 
             // 3. Redirect to Thank You Page
@@ -436,7 +437,6 @@
             
         } catch (error) {
             console.error('Webhook Error:', error);
-            // Fail-safe: Redirect anyway so user isn't stuck
             window.location.href = 'thankyou.html';
         }
     });
