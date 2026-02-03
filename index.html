@@ -230,7 +230,7 @@
             color: var(--accent); 
             margin-right: 12px; 
             font-weight: 900;
-            flex-shrink: 0; /* Prevents arrow from squishing */
+            flex-shrink: 0; 
         }
 
         /* --- FOOTER --- */
@@ -282,7 +282,6 @@
             
             .founders-wrap { padding: 32px 16px; }
             
-            /* FIXED: Single Column on Mobile so text doesn't cut off */
             .founders-grid { 
                 grid-template-columns: 1fr; 
                 gap: 8px;
@@ -376,7 +375,11 @@
         <form id="leadForm">
             <input type="text" name="full_name" placeholder="Full Name" required>
             <input type="email" name="email" placeholder="Business Email" required>
-            <input type="tel" name="phone" placeholder="Phone (with Country Code)" required>
+            
+            <div style="position: relative; margin-bottom: 12px;">
+                <span style="position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: #64748b; font-weight: 600; pointer-events: none;">+91</span>
+                <input type="tel" name="phone" placeholder="Phone Number" required style="padding-left: 54px; margin-bottom: 0;">
+            </div>
             
             <label class="consent-box">
                 <input type="checkbox" required checked style="width: auto; margin-top: 4px;">
@@ -416,7 +419,14 @@
         submitBtn.disabled = true;
 
         const formData = new FormData(leadForm);
-        const data = Object.fromEntries(formData.entries());
+        let data = Object.fromEntries(formData.entries());
+
+        // --- ADDED: Force Add +91 to the data ---
+        if (data.phone) {
+            // Removes any non-digits (spaces, dashes) and adds +91
+            data.phone = "+91" + data.phone.replace(/\D/g, ''); 
+        }
+        // ----------------------------------------
 
         try {
             // 1. Send Data to Webhook
